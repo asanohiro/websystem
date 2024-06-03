@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>他病院登録</title>
+</head>
+<body>
+    <h1>他病院登録</h1>
+    <form method="post" action="{% url 'ohregister' %}">
+        {% csrf_token %}
+        <div>
+            <label for="tabyouinid">他病院ID:</label>
+            <input type="text" id="tabyouinid" name="tabyouinid" required>
+        </div>
+        <div>
+            <label for="tabyouinmei">他病院名:</label>
+            <input type="text" id="tabyouinmei" name="tabyouinmei" required>
+        </div>
+        <div>
+            <label for="tabyouinaddress">他病院住所:</label>
+            <input type="text" id="tabyouinaddress" name="tabyouinaddress" required>
+        </div>
+        <div>
+            <label for="tabyouintel">他病院電話番号:</label>
+            <input type="text" id="tabyouintel" name="tabyouintel" required>
+        </div>
+        <div>
+            <label for="tabyouinshihonkin">資本金:</label>
+            <input type="number" id="tabyouinshihonkin" name="tabyouinshihonkin" required>
+        </div>
+        <div>
+            <label for="kyukyu">救急フラグ:</label>
+            <select id="kyukyu" name="kyukyu" required>
+                <option value="1">1 (救急対応)</option>
+                <option value="0">0 (非救急対応)</option>
+            </select>
+        </div>
+        <div>
+            <button type="submit">登録</button>
+        </div>
+    </form>
+</body>
+</html>

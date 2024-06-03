@@ -1,0 +1,35 @@
+<!-- kadai1/templates/kadai1/administrator/NameChange.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>従業員情報更新</title>
+</head>
+<body>
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <form method="post">
+        {% csrf_token %}
+        <label for="user_id">ユーザーID検索:</label>
+        <input type="text" id="user_id" name="user_id" required>
+        <button type="submit">検索</button>
+    </form>
+
+    {% if employee %}
+    <form method="post">
+        {% csrf_token %}
+        <input type="hidden" name="employee_user_id" value="{{ employee.empid }}">
+        <label for="last_name">姓:</label>
+        <input type="text" id="last_name" name="last_name" value="{{ employee.emplname }}" required>
+        <label for="first_name">名:</label>
+        <input type="text" id="first_name" name="first_name" value="{{ employee.empfname }}" required>
+        <button type="submit">更新</button>
+    </form>
+    {% endif %}
+</body>
+</html>

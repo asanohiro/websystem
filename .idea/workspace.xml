@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="8abb9f8d-94d8-470b-b382-742116187535" name="変更" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/djangoProject1.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/debug.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/djangoProject1/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/djangoProject1/asgi.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/djangoProject1/settings.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/djangoProject1/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/djangoProject1/wsgi.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/kadai1/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/kadai1/admin.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/kadai1/apps.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/kadai1/migrations/0001_initial.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/kadai1/migrations/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/kadai1/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/kadai1/templates/kadai1/administrator/EmployeeRegistration.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/kadai1/templates/kadai1/administrator/EmployeeRegistrationConfirm.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/kadai1/templates/kadai1/administrator/ListofOtherHospitals.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/kadai1/templates/kadai1/administrator/NameChange.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/kadai1/templates/kadai1/administrator/OtherHospitalAddressSearch.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/kadai1/templates/kadai1/administrator/OtherHospitalRegistration.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/kadai1/templates/kadai1/administrator/PassChangeAdmin.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/kadai1/templates/kadai1/administrator/administrator.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/kadai1/templates/kadai1/doctor/DeleteDrugAdministration.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/kadai1/templates/kadai1/doctor/MedicationConfirmation.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/kadai1/templates/kadai1/doctor/MedicationInstruction.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/kadai1/templates/kadai1/doctor/PatientNameSearch.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/kadai1/templates/kadai1/doctor/TreatmentConfirmed.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/kadai1/templates/kadai1/doctor/TreatmentHistory.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/kadai1/templates/kadai1/doctor/doctor.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/kadai1/templates/kadai1/header.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/kadai1/templates/kadai1/login.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/kadai1/templates/kadai1/reception/PassChange.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/kadai1/templates/kadai1/reception/PatiantRagist.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/kadai1/templates/kadai1/reception/PatientInsuranceCardChange.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/kadai1/templates/kadai1/reception/PatientInsuranceCardChangeConfirm.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/kadai1/templates/kadai1/reception/PatientNameSearch.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/kadai1/templates/kadai1/reception/PatientRegisterConfirm.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/kadai1/templates/kadai1/reception/reception.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/kadai1/tests.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/kadai1/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/kadai1/views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/manage.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
+    <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+        <option value="HTML File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
+  <component name="ProjectId" id="2geJkD28QWWdK5phxFuzl3ZGR8y" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;Django サーバー.djangoProject1.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenDjangoStructureViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.pycharm.django.structure.promotion.once.per.project&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/asanohiro/PycharmProjects/djangoProject1/kadai1/templates/kadai1&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/kadai1/templates/kadai1" />
+      <recent name="$PROJECT_DIR$/kadai1" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/kadai1/templates/kadai1" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/kadai1" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="djangoProject1" type="Python.DjangoServer" factoryName="Django server">
+      <module name="djangoProject1" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="DJANGO_SETTINGS_MODULE" value="djangoProject1.settings" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="launchJavascriptDebuger" value="false" />
+      <option name="port" value="8000" />
+      <option name="host" value="localhost" />
+      <option name="additionalOptions" value="" />
+      <option name="browserUrl" value="" />
+      <option name="runTestServer" value="false" />
+      <option name="runNoReload" value="false" />
+      <option name="useCustomRunCommand" value="false" />
+      <option name="customRunCommand" value="" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-1d06a55b98c1-74d2a5396914-JavaScript-PY-241.14494.241" />
+        <option value="bundled-python-sdk-0509580d9d50-28c9f5db9ffe-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-241.14494.241" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="アプリケーションレベル" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="デフォルトタスク">
+      <changelist id="8abb9f8d-94d8-470b-b382-742116187535" name="変更" comment="" />
+      <created>1716052250886</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1716052250886</updated>
+      <workItem from="1716052251648" duration="1299000" />
+      <workItem from="1716053567905" duration="1180000" />
+      <workItem from="1716170465650" duration="1933000" />
+      <workItem from="1716173959275" duration="30000" />
+      <workItem from="1716174008774" duration="984000" />
+      <workItem from="1716175048777" duration="95000" />
+      <workItem from="1716175211262" duration="1537000" />
+      <workItem from="1716209504548" duration="1827000" />
+      <workItem from="1716258232890" duration="3836000" />
+      <workItem from="1716344769882" duration="805000" />
+      <workItem from="1716345672193" duration="724000" />
+      <workItem from="1716346416428" duration="1567000" />
+      <workItem from="1716352804829" duration="4845000" />
+      <workItem from="1716388963896" duration="4014000" />
+      <workItem from="1716392998761" duration="1415000" />
+      <workItem from="1716423597530" duration="1440000" />
+      <workItem from="1716425056040" duration="1021000" />
+      <workItem from="1716426158647" duration="6792000" />
+      <workItem from="1716529651518" duration="2978000" />
+      <workItem from="1716541217933" duration="1363000" />
+      <workItem from="1716769403838" duration="5484000" />
+      <workItem from="1716858295183" duration="8810000" />
+      <workItem from="1716885814969" duration="4037000" />
+      <workItem from="1716945933903" duration="3957000" />
+      <workItem from="1716960757392" duration="632000" />
+      <workItem from="1717034583363" duration="2708000" />
+      <workItem from="1717123817787" duration="106000" />
+      <workItem from="1717203939352" duration="8274000" />
+      <workItem from="1717293765375" duration="1676000" />
+      <workItem from="1717375341632" duration="4299000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+</project>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>機能選択</title>
+</head>
+<body>
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+a {
+    padding: 10px 20px;
+    margin: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+}
+
+a:hover {
+    background-color: #0056b3;
+}
+</style>
+    <h1>機能選択</h1>
+    <div class="buttons">
+        <a href="{% url 'register' %}">従業員登録機能</a>
+        <a href="{% url 'namechange' %}">従業員更新機能</a>
+        <a href="{% url 'ohregister' %}">他病院登録機能</a>
+        <a href="{% url 'otherhospitallist' %}">他病院一覧表示機能</a>
+        <a href="{% url 'otherhospitalsearch' %}">他病院検索機能</a>
+    </div>
+</body>
+</html>

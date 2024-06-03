@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>管理者用パスワード変更</title>
+    <link rel="stylesheet" href="PassChangeAdmin.css">
+  <link rel="stylesheet" href="flex.css">
+    <script>
+        function validatePasswords() {
+            var newPassword = document.getElementById("new-password").value;
+            var confirmPassword = document.getElementById("confirm-password").value;
+            if (newPassword !== confirmPassword) {
+                alert("パスワードが一致しません。");
+                return false;
+            }
+            if (newPassword === "") {
+                alert("新しいパスワードを入力してください。");
+                return false;
+            }
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <h1>管理者用パスワード変更</h1>
+    <div class="flex">
+    <form action="findUser.php" method="post">
+        <div>
+            <label for="userId">ユーザーID:</label>
+            <input type="text" id="userId" name="userId" required>
+            <button type="submit">ユーザー検索</button>
+        </div>
+    </form>
+    <form action="updatePassword.php" method="post" onsubmit="return validatePasswords();">
+        <div>
+            <label for="new-password">新しいパスワード:</label>
+            <input type="password" id="new-password" name="newPassword" required>
+        </div>
+        <div>
+            <label for="confirm-password">新しいパスワード (確認):</label>
+            <input type="password" id="confirm-password" required>
+        </div>
+        <div>
+            <button type="submit">パスワード変更</button>
+        </div>
+    </form>
+  </div>
+</body>
+</html>

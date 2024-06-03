@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>他病院一覧表示</title>
+</head>
+<body>
+    <div class="flex">
+        <h1>他病院一覧</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>他病院ID</th>
+                    <th>他病院名</th>
+                    <th>住所</th>
+                    <th>電話番号</th>
+                    <th>資本金</th>
+                    <th>救急対応</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for hospital in hospitals %}
+                <tr>
+                    <td>{{ hospital.tabyouinid }}</td>
+                    <td>{{ hospital.tabyouinmei }}</td>
+                    <td>{{ hospital.tabyouinaddress }}</td>
+                    <td>{{ hospital.tabyouintel }}</td>
+                    <td>{{ hospital.tabyouinshihonkin }}万円</td>
+                    <td>{% if hospital.kyukyu == 1 %}対応あり{% else %}対応なし{% endif %}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

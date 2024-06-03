@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>処置確定</title>
+</head>
+<body>
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.flex {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 80%;
+    margin-bottom: 20px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+p {
+    margin-bottom: 20px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+}
+
+button[type="button"] {
+    background-color: #f44336;
+    color: white;
+    border: none;
+}
+</style>
+    <div class="flex">
+        <h1>処置確定画面</h1>
+        <form action="confirmTreatment.php" method="post">
+            <table>
+                <thead>
+                    <tr>
+                        <th>薬剤名</th>
+                        <th>数量</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>薬剤1</td>
+                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <td>薬剤2</td>
+                        <td>3</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p>
+                この処置を削除しますか？
+            </p>
+            <div class="buttons">
+                <button type="button" onclick="goBack()">薬剤削除画面へ戻る</button>
+                <button type="submit">処置確定</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

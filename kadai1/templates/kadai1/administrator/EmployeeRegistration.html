@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>従業員登録</title>
+</head>
+<body>
+{% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <h1>従業員登録</h1>
+    <form method="post" action="{% url 'register' %}">
+        {% csrf_token %}
+        <div>
+            <label for="empid">ユーザーID:</label>
+            <input type="text" id="empid" name="empid" required>
+        </div>
+        <div>
+            <label for="emplname">姓:</label>
+            <input type="text" id="emplname" name="emplname" required>
+        </div>
+        <div>
+            <label for="empfname">名:</label>
+            <input type="text" id="empfname" name="empfname" required>
+        </div>
+        <div>
+            <label for="emppasswd">パスワード:</label>
+            <input type="password" id="emppasswd" name="emppasswd" required>
+        </div>
+        <div>
+            <label for="emppasswd_confirm">パスワード確認:</label>
+            <input type="password" id="emppasswd_confirm" name="emppasswd_confirm" required>
+        </div>
+        <div>
+            <label for="emprole">ロール:</label>
+            <select id="emprole" name="emprole" required>
+                <option value="1">管理者</option>
+                <option value="2">医師</option>
+                <option value="3">受付</option>
+            </select>
+        </div>
+        <div>
+            <button type="submit">登録確認</button>
+        </div>
+    </form>
+</body>
+</html>

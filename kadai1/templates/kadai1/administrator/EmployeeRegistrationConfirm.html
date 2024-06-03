@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>従業員登録確認</title>
+</head>
+<body>
+    <h1>従業員登録確認</h1>
+    <form method="post" action="{% url 'register_complete' %}">
+        {% csrf_token %}
+        <div>
+            <label>ユーザーID:</label>
+            <span>{{ empid }}</span>
+            <input type="hidden" name="empid" value="{{ empid }}">
+        </div>
+        <div>
+            <label>姓:</label>
+            <span>{{ emplname }}</span>
+            <input type="hidden" name="emplname" value="{{ emplname }}">
+        </div>
+        <div>
+            <label>名:</label>
+            <span>{{ empfname }}</span>
+            <input type="hidden" name="empfname" value="{{ empfname }}">
+        </div>
+        <div>
+            <label>パスワード:</label>
+            <span>{{ emppasswd }}</span>
+            <input type="hidden" name="emppasswd" value="{{ emppasswd }}">
+        </div>
+        <div>
+            <label>ロール:</label>
+            <span>{{ emprole }}</span>
+            <input type="hidden" name="emprole" value="{{ emprole }}">
+        </div>
+        <div>
+            <button type="submit">登録</button>
+            <button type="button" onclick="history.back()">修正</button>
+        </div>
+    </form>
+</body>
+</html>

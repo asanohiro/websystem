@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../css/DeleteDrugAdministration.css">
+    <title>薬剤投与削除</title>
+</head>
+<body>
+    <div class="flex">
+        <h1>薬剤投与削除</h1>
+        <form action="updateMedication.php" method="post">
+            <table>
+                <thead>
+                    <tr>
+                        <th>薬剤名</th>
+                        <th>数量</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>薬剤1</td>
+                        <td>2</td>
+                        <td><button type="button" onclick="removeItem(this);">削除</button></td>
+                    </tr>
+                    <tr>
+                        <td>薬剤2</td>
+                        <td>3</td>
+                        <td><button type="button" onclick="removeItem(this);">削除</button></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="buttons">
+                <button type="submit">削除する</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

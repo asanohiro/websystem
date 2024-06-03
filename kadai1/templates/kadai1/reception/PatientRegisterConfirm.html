@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>患者登録確認</title>
+</head>
+<body>
+    <div class="container">
+        <h1>患者登録確認</h1>
+        <form action="{% url 'patient_register_confirm' %}" method="post">
+            {% csrf_token %}
+            <div>
+                <p>患者ID: {{ patid }}</p>
+                <input type="hidden" name="patient_id" value="{{ patid }}">
+            </div>
+            <div>
+                <p>患者姓: {{ patlname }}</p>
+                <input type="hidden" name="last_name" value="{{ patlname }}">
+            </div>
+            <div>
+                <p>患者名: {{ patfname }}</p>
+                <input type="hidden" name="first_name" value="{{ patfname }}">
+            </div>
+            <div>
+                <p>保険証記号番号: {{ hokenmei }}</p>
+                <input type="hidden" name="insurance_number" value="{{ hokenmei }}">
+            </div>
+            <div>
+                <p>有効期限: {{ hokenexp }}</p>
+                <input type="hidden" name="expiration_date" value="{{ hokenexp }}">
+            </div>
+            <div>
+                <button type="submit">登録</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

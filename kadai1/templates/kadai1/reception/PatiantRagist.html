@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>患者登録</title>
+</head>
+<body>
+    <div class="container">
+        <h1>患者登録</h1>
+        <form action="{% url 'patient_register' %}" method="post">
+            {% csrf_token %}
+            <div>
+                <label for="patient_id">患者ID:</label>
+                <input type="text" id="patient_id" name="patient_id" required>
+            </div>
+            <div>
+                <label for="last_name">患者姓:</label>
+                <input type="text" id="last_name" name="last_name" required>
+            </div>
+            <div>
+                <label for="first_name">患者名:</label>
+                <input type="text" id="first_name" name="first_name" required>
+            </div>
+            <div>
+                <label for="insurance_number">保険証記号番号:</label>
+                <input type="text" id="insurance_number" name="insurance_number" required>
+            </div>
+            <div>
+                <label for="expiration_date">有効期限:</label>
+                <input type="date" id="expiration_date" name="expiration_date" required>
+            </div>
+            <div>
+                <button type="submit">登録確認</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

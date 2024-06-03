@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>処置履歴確認</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+    </style>
+</head>
+<body>
+    <h1>処置履歴確認</h1>
+    <form method="post">
+        {% csrf_token %}
+        <div>
+            <label for="patient_id">患者ID:</label>
+            <input type="text" id="patient_id" name="patient_id" required>
+            <button type="submit">検索</button>
+        </div>
+    </form>
+    {% if treatments is not None %}
+        {% if treatments %}
+            <h2>処置履歴:</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>処置日</th>
+                        <th>薬剤名</th>
+                        <th>数量</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for treatment in treatments %}
+                        <tr>
+                            <td>{{ treatment.treatmentdate }}</td>
+                            <td>{{ treatment.medicineid.medicinename }}</td>
+                            <td>{{ treatment.quantity }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>該当患者の処置履歴がありません。</p>
+        {% endif %}
+        <div>
+            <button onclick="window.location.href='{% url 'doctor_home' %}'">メニューに戻る</button>
+            <button onclick="window.location.href='{% url 'treatment_history' %}'">患者IDを指定する</button>
+        </div>
+    {% endif %}
+</body>
+</html>

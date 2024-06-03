@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>患者名検索</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+        .flex {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        form div {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="flex">
+        <h1>患者名検索</h1>
+        <form method="post" action="{% url 'search_patient_by_name' %}">
+            {% csrf_token %}
+            <div>
+                <label for="patient_name">患者名:</label>
+                <input type="text" id="patient_name" name="patient_name" required>
+                <button type="submit">検索</button>
+            </div>
+        </form>
+        {% if patients %}
+            <h2>検索結果:</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>患者ID</th>
+                        <th>姓</th>
+                        <th>名</th>
+                        <th>保険証番号</th>
+                        <th>有効期限</th>
+                        <th>アクション</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for patient in patients %}
+                        <tr>
+                            <td>{{ patient.patid }}</td>
+                            <td>{{ patient.patlname }}</td>
+                            <td>{{ patient.patfname }}</td>
+                            <td>{{ patient.hokenmei }}</td>
+                            <td>{{ patient.hokenexp }}</td>
+                            <td>
+                                {% if user_role == 2 %}
+                                    <a href="{% url 'medication_instruction' patient.patid %}">薬剤投与指示</a>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>該当する患者が見つかりませんでした。</p>
+        {% endif %}
+    </div>
+</body>
+</html>

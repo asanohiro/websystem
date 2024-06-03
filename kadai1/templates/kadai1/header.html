@@ -1,0 +1,25 @@
+<!-- header.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}My Site{% endblock %}</title>
+    <style>
+        /* ヘッダーのスタイルをここに追加 */
+        .header {
+            background-color: #f8f9fa;
+            padding: 10px;
+            text-align: right;
+        }
+        .header a {
+            margin: 0 10px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="{% url 'login' %}">ログイン画面に戻る</a>
+    </div>
+</body>
+</html>

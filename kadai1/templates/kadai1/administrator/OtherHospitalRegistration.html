@@ -6,6 +6,13 @@
 </head>
 <body>
     <h1>他病院登録</h1>
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
     <form method="post" action="{% url 'ohregister' %}">
         {% csrf_token %}
         <div>

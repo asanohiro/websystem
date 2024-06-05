@@ -11,7 +11,6 @@ urlpatterns = [
     path('admin_home/namechange/', views.namechange_view, name='namechange'),
     path('admin_home/namechange_success/', views.namechange_success, name='namechange_success'),
     path('admin_home/ohregister/', views.other_hospital_register_view, name='ohregister'),
-    path('admin_home/ohregister_success/', views.other_hospital_register_success, name='ohregister_success'),
     path('admin_home/other_hospitals/', views.other_hospital_list, name='otherhospitallist'),
     path('admin_home/other_hospital_search/', views.search_hospital_by_address, name='otherhospitalsearch'),
     path('reception_home/passchange/', views.change_password_view, name='passchange'),

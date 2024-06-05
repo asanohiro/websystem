@@ -4,6 +4,24 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
+    <script>
+        function validateForm() {
+            const userid = document.getElementById("userid").value;
+            const password = document.getElementById("password").value;
+
+            if (userid.length > 20) {
+                alert("UserIDは20文字以内で入力してください。");
+                return false;
+            }
+
+            if (password.length > 128) {
+                alert("Passwordは128文字以内で入力してください。");
+                return false;
+            }
+
+            return true;
+        }
+    </script>
 </head>
 <body>
     <h2>Login</h2>
@@ -14,12 +32,12 @@
             {% endfor %}
         </ul>
     {% endif %}
-    <form method="post">
+    <form method="post" onsubmit="return validateForm();">
         {% csrf_token %}
         <label for="userid">UserID:</label>
-        <input type="text" id="userid" name="userid" required><br>
+        <input type="text" id="userid" name="userid" required maxlength="20"><br>
         <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required><br>
+        <input type="password" id="password" name="password" required maxlength="128"><br>
         <button type="submit">Login</button>
     </form>
 </body>

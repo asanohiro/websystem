@@ -14,56 +14,61 @@ logger = logging.getLogger(__name__)
 def login_home(request):
     return render(request, 'kadai1/login.html')
 
-
 def login_view(request):
     if request.method == 'POST':
         userid = request.POST.get('userid')
         password = request.POST.get('password')
 
         if not userid or not password:
-            logger.debug('Username or password not provided.')
-            messages.error(request, 'Both username and password are required.')
+            logger.debug('ユーザーIDまたはパスワードが入力されていません。')
+            messages.error(request, 'ユーザーIDとパスワードは必須です。')
+            return render(request, 'kadai1/login.html')
+
+        if len(userid) > 20 or len(password) > 128:
+            logger.debug('ユーザーIDまたはパスワードの長さが不正です。')
+            messages.error(request, 'ユーザーIDまたはパスワードの長さが不正です。')
             return render(request, 'kadai1/login.html')
 
         try:
             employee = Employee.objects.get(empid=userid)
-            logger.debug(f'Employee found: {employee.empid}')
+            logger.debug(f'従業員が見つかりました: {employee.empid}')
 
             if employee.emprole == 1:  # 管理者の場合は平文のパスワードを使用
                 if password == employee.emppasswd:
-                    logger.debug('Password check passed for admin.')
+                    logger.debug('管理者のパスワードチェックに成功しました。')
                     request.session['employee_id'] = employee.empid
                     request.session['employee_role'] = employee.emprole
                     return redirect('admin_home')
                 else:
-                    logger.debug('Password check failed for admin.')
-                    messages.error(request, 'Invalid username or password.')
+                    logger.debug('管理者のパスワードチェックに失敗しました。')
+                    messages.error(request, 'ユーザーIDまたはパスワードが無効です。')
             else:
-                if check_password(password, employee.emppasswd):  # ハッシュ化されたパスワードを検証
-                    logger.debug('Password check passed.')
+                if password == employee.emppasswd:  # 一時的に平文でのパスワードチェックを実施
+                    logger.debug('パスワードチェックに成功しました。')
                     request.session['employee_id'] = employee.empid
                     request.session['employee_role'] = employee.emprole
 
-                    if employee.emprole == 2:  # 2 = doctor
+                    if employee.emprole == 2:  # 医師
                         return redirect('doctor_home')
-                    elif employee.emprole == 3:  # 3 = reception
+                    elif employee.emprole == 3:  # 受付
                         return redirect('reception_home')
                     else:
-                        logger.debug('Invalid role.')
-                        messages.error(request, 'Invalid role.')
+                        logger.debug('無効な役割です。')
+                        messages.error(request, '無効な役割です。')
                 else:
-                    logger.debug('Password check failed.')
-                    messages.error(request, 'Invalid username or password.')
+                    logger.debug('パスワードチェックに失敗しました。')
+                    messages.error(request, 'ユーザーIDまたはパスワードが無効です。')
 
         except Employee.DoesNotExist:
-            logger.debug('Employee does not exist.')
-            messages.error(request, 'Invalid username or password.')
+            logger.debug('従業員が存在しません。')
+            messages.error(request, 'ユーザーIDまたはパスワードが無効です。')
 
         except Exception as e:
-            logger.error(f'Unexpected error during login: {e}')
-            messages.error(request, 'An unexpected error occurred. Please try again later.')
+            logger.error(f'ログイン中に予期しないエラーが発生しました: {e}')
+            messages.error(request, '予期しないエラーが発生しました。もう一度お試しください。')
 
     return render(request, 'kadai1/login.html')
+
 def admin_home(request):
     if request.session.get('employee_role') == 1:
         return render(request, 'kadai1/administrator/administrator.html')
@@ -179,6 +184,7 @@ def namechange_view(request):
 def namechange_success(request):
     return HttpResponse("Name changed successfully")
 
+
 def other_hospital_register_view(request):
     if request.method == 'POST':
         tabyouinid = request.POST.get('tabyouinid')
@@ -188,27 +194,57 @@ def other_hospital_register_view(request):
         tabyouinshihonkin = request.POST.get('tabyouinshihonkin')
         kyukyu = request.POST.get('kyukyu')
 
-        # 他病院の登録
+        # 入力データの検証
+        if not tabyouinid or not tabyouinmei or not tabyouinaddress or not tabyouintel or not tabyouinshihonkin or kyukyu is None:
+            messages.error(request, '全てのフィールドを正しく入力してください。')
+            return render(request, 'kadai1/administrator/OtherHospitalRegistration.html')
+
+        if not tabyouinid.isdigit():
+            messages.error(request, '他病院IDは数値を入力してください。')
+            return render(request, 'kadai1/administrator/OtherHospitalRegistration.html')
+
+        if not tabyouintel.isdigit():
+            messages.error(request, '他病院電話番号は数字、（）、-を入力してください。')
+            return render(request, 'kadai1/administrator/OtherHospitalRegistration.html')
+
         try:
+            tabyouinshihonkin_value = float(tabyouinshihonkin)
+        except ValueError:
+            messages.error(request, '資本金は数値を入力してください。')
+            return render(request, 'kadai1/administrator/OtherHospitalRegistration.html')
+
+        if kyukyu not in ['0', '1']:
+            messages.error(request, '救急フラグは0または1を入力してください。')
+            return render(request, 'kadai1/administrator/OtherHospitalRegistration.html')
+
+        try:
+            # 他病院の登録
             Tabyouin.objects.create(
                 tabyouinid=tabyouinid,
                 tabyouinmei=tabyouinmei,
                 tabyouinaddress=tabyouinaddress,
                 tabyouintel=tabyouintel,
-                tabyouinshihonkin=tabyouinshihonkin,
+                tabyouinshihonkin=tabyouinshihonkin_value,
                 kyukyu=kyukyu
             )
-            return redirect('ohregister_success')
+            messages.success(request, '他病院登録が成功しました。')
+        except IntegrityError:
+            messages.error(request, 'IDが既に登録されています。')
         except Exception as e:
-            return HttpResponse(f"Error: {e}")
+            messages.error(request, 'エラーが発生しました。再試行してください。')
 
     return render(request, 'kadai1/administrator/OtherHospitalRegistration.html')
 
-def other_hospital_register_success(request):
-    return HttpResponse("他病院登録が成功しました")
 
 def other_hospital_list(request):
-    hospitals = Tabyouin.objects.all()
+    try:
+        hospitals = Tabyouin.objects.all()
+        if not hospitals.exists():
+            messages.warning(request, '表示する病院がありません。')
+    except Exception as e:
+        messages.error(request, f'エラーが発生しました: {e}')
+        hospitals = []
+
     return render(request, 'kadai1/administrator/ListofOtherHospitals.html', {'hospitals': hospitals})
 
 def search_hospital_by_address(request):

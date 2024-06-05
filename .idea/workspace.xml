@@ -4,53 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8abb9f8d-94d8-470b-b382-742116187535" name="変更" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/djangoProject1.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/debug.log" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/djangoProject1/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/djangoProject1/asgi.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/djangoProject1/settings.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/djangoProject1/urls.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/djangoProject1/wsgi.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kadai1/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kadai1/admin.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kadai1/apps.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kadai1/migrations/0001_initial.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kadai1/migrations/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kadai1/models.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kadai1/templates/kadai1/administrator/EmployeeRegistration.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kadai1/templates/kadai1/administrator/EmployeeRegistrationConfirm.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kadai1/templates/kadai1/administrator/ListofOtherHospitals.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kadai1/templates/kadai1/administrator/NameChange.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kadai1/templates/kadai1/administrator/OtherHospitalAddressSearch.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kadai1/templates/kadai1/administrator/OtherHospitalRegistration.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kadai1/templates/kadai1/administrator/PassChangeAdmin.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kadai1/templates/kadai1/administrator/administrator.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kadai1/templates/kadai1/doctor/DeleteDrugAdministration.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kadai1/templates/kadai1/doctor/MedicationConfirmation.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kadai1/templates/kadai1/doctor/MedicationInstruction.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kadai1/templates/kadai1/doctor/PatientNameSearch.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kadai1/templates/kadai1/doctor/TreatmentConfirmed.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kadai1/templates/kadai1/doctor/TreatmentHistory.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kadai1/templates/kadai1/doctor/doctor.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kadai1/templates/kadai1/header.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kadai1/templates/kadai1/login.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kadai1/templates/kadai1/reception/PassChange.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kadai1/templates/kadai1/reception/PatiantRagist.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kadai1/templates/kadai1/reception/PatientInsuranceCardChange.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kadai1/templates/kadai1/reception/PatientInsuranceCardChangeConfirm.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kadai1/templates/kadai1/reception/PatientNameSearch.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kadai1/templates/kadai1/reception/PatientRegisterConfirm.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kadai1/templates/kadai1/reception/reception.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kadai1/tests.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kadai1/urls.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kadai1/views.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/manage.py" afterDir="false" />
+    <list default="true" id="8abb9f8d-94d8-470b-b382-742116187535" name="変更" comment="ほぼ完成">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/debug.log" beforeDir="false" afterPath="$PROJECT_DIR$/debug.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kadai1/templates/kadai1/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/kadai1/templates/kadai1/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kadai1/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/kadai1/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -184,8 +142,21 @@
       <workItem from="1717123817787" duration="106000" />
       <workItem from="1717203939352" duration="8274000" />
       <workItem from="1717293765375" duration="1676000" />
-      <workItem from="1717375341632" duration="4299000" />
+      <workItem from="1717375341632" duration="7624000" />
+      <workItem from="1717466268509" duration="2951000" />
+      <workItem from="1717474071154" duration="599000" />
+      <workItem from="1717561951300" duration="559000" />
+      <workItem from="1717562528265" duration="3000" />
     </task>
+    <task id="LOCAL-00001" summary="ほぼ完成">
+      <option name="closed" value="true" />
+      <created>1717382829273</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1717382829273</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -193,5 +164,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="ほぼ完成" />
+    <option name="LAST_COMMIT_MESSAGE" value="ほぼ完成" />
   </component>
 </project>

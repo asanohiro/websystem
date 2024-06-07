@@ -21,10 +21,10 @@
     </style>
 </head>
 <body>
-    <div class="flex">
+    <div class="container">
         <h1>薬剤投与確認</h1>
-        {% if medication_details %}
-            <h2>追加された薬剤:</h2>
+        <form method="post" action="{% url 'medication_confirmation' %}">
+            {% csrf_token %}
             <table>
                 <thead>
                     <tr>
@@ -39,22 +39,17 @@
                             <td>{{ item.medicine.medicinename }}</td>
                             <td>{{ item.quantity }}</td>
                             <td>
-                                <form method="post" style="display:inline;">
-                                    {% csrf_token %}
-                                    <input type="hidden" name="medication_id" value="{{ item.medicine.medicineid }}">
-                                    <button type="submit" name="delete">削除</button>
-                                </form>
+                                <button type="submit" name="delete" value="{{ item.medicine.medicineid }}">削除</button>
                             </td>
                         </tr>
                     {% endfor %}
                 </tbody>
             </table>
-            <form method="post">
-                {% csrf_token %}
+            <div>
                 <button type="submit" name="confirm">処置確定</button>
                 <button type="submit" name="back">薬剤選択画面へ戻る</button>
-            </form>
-        {% endif %}
+            </div>
+        </form>
     </div>
 </body>
 </html>

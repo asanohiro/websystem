@@ -9,10 +9,10 @@
         <h1>パスワード変更</h1>
         <form action="{% url 'passchange' %}" method="post">
             {% csrf_token %}
-            <div>
-                <label for="current_password">現在のパスワード:</label>
-                <input type="password" id="current_password" name="current_password" required>
-            </div>
+{#            <div>#}
+{#                <label for="current_password">現在のパスワード:</label>#}
+{#                <input type="password" id="current_password" name="current_password" required>#}
+{#            </div>#}
             <div>
                 <label for="new_password">新しいパスワード:</label>
                 <input type="password" id="new_password" name="new_password" required>

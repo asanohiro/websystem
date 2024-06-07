@@ -4,10 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8abb9f8d-94d8-470b-b382-742116187535" name="変更" comment="ほぼ完成">
+    <list default="true" id="8abb9f8d-94d8-470b-b382-742116187535" name="変更" comment="試し">
+      <change afterPath="$PROJECT_DIR$/kadai1/templates/kadai1/doctor/PatientNameSearchDoctor.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/kadai1/templates/kadai1/reception/PatientNameSearchReception.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/debug.log" beforeDir="false" afterPath="$PROJECT_DIR$/debug.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kadai1/templates/kadai1/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/kadai1/templates/kadai1/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kadai1/templates/kadai1/doctor/MedicationConfirmation.html" beforeDir="false" afterPath="$PROJECT_DIR$/kadai1/templates/kadai1/doctor/MedicationConfirmation.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kadai1/templates/kadai1/doctor/MedicationInstruction.html" beforeDir="false" afterPath="$PROJECT_DIR$/kadai1/templates/kadai1/doctor/MedicationInstruction.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kadai1/templates/kadai1/doctor/PatientNameSearch.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/kadai1/templates/kadai1/doctor/doctor.html" beforeDir="false" afterPath="$PROJECT_DIR$/kadai1/templates/kadai1/doctor/doctor.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kadai1/templates/kadai1/reception/PassChange.html" beforeDir="false" afterPath="$PROJECT_DIR$/kadai1/templates/kadai1/reception/PassChange.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kadai1/templates/kadai1/reception/PatientNameSearch.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/kadai1/templates/kadai1/reception/reception.html" beforeDir="false" afterPath="$PROJECT_DIR$/kadai1/templates/kadai1/reception/reception.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kadai1/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/kadai1/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/kadai1/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/kadai1/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -147,6 +156,11 @@
       <workItem from="1717474071154" duration="599000" />
       <workItem from="1717561951300" duration="559000" />
       <workItem from="1717562528265" duration="3000" />
+      <workItem from="1717562652075" duration="4354000" />
+      <workItem from="1717637485402" duration="74000" />
+      <workItem from="1717639026194" duration="3516000" />
+      <workItem from="1717719797662" duration="808000" />
+      <workItem from="1717720618496" duration="5719000" />
     </task>
     <task id="LOCAL-00001" summary="ほぼ完成">
       <option name="closed" value="true" />
@@ -156,15 +170,35 @@
       <option name="project" value="LOCAL" />
       <updated>1717382829273</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="試し">
+      <option name="closed" value="true" />
+      <created>1717567234457</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1717567234457</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="ほぼ完成" />
-    <option name="LAST_COMMIT_MESSAGE" value="ほぼ完成" />
+    <MESSAGE value="試し" />
+    <option name="LAST_COMMIT_MESSAGE" value="試し" />
   </component>
 </project>

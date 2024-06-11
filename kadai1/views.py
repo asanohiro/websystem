@@ -406,6 +406,19 @@ def search_patient_by_name(request):
 
     return render(request, template_name, {'patients': patients, 'user_role': user_role})
 
+def search_patient_by_id(request):
+    if request.method == 'POST':
+        patient_id = request.POST.get('patient_id')
+        if patient_id:
+            try:
+                patient = Patient.objects.get(patid=patient_id)
+                # 患者が見つかった場合、投薬指示画面へリダイレクト
+                return redirect('medication_instruction', patient_id=patient.patid)
+            except Patient.DoesNotExist:
+                messages.error(request, '該当する患者が見つかりません。')
+
+    return render(request, 'kadai1/doctor/PatientIDSearch.html')
+
 # 薬剤投与指示ビューの修正
 def medication_instruction(request, patient_id):
     patient = get_object_or_404(Patient, patid=patient_id)

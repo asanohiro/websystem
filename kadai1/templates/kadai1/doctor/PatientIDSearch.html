@@ -1,0 +1,58 @@
+<!-- kadai1/templates/kadai1/reception/PatientIDSearch.html -->
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>患者ID検索</title>
+</head>
+<body>
+    <div class="container">
+        <h1>患者ID検索</h1>
+
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        <form method="post" action="{% url 'search_patient_by_id' %}">
+            {% csrf_token %}
+            <div>
+                <label for="patient_id">患者ID:</label>
+                <input type="text" id="patient_id" name="patient_id" required>
+            </div>
+            <div>
+                <button type="submit">検索</button>
+            </div>
+        </form>
+
+        {% if patient %}
+            <h2>患者詳細</h2>
+            <table>
+                <tr>
+                    <th>患者ID</th>
+                    <td>{{ patient.patid }}</td>
+                </tr>
+                <tr>
+                    <th>姓</th>
+                    <td>{{ patient.patlname }}</td>
+                </tr>
+                <tr>
+                    <th>名</th>
+                    <td>{{ patient.patfname }}</td>
+                </tr>
+                <tr>
+                    <th>保険証記号番号</th>
+                    <td>{{ patient.hokenmei }}</td>
+                </tr>
+                <tr>
+                    <th>有効期限</th>
+                    <td>{{ patient.hokenexp }}</td>
+                </tr>
+            </table>
+        {% endif %}
+    </div>
+</body>
+</html>

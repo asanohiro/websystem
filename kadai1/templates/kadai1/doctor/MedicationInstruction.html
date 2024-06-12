@@ -23,7 +23,17 @@
 <body>
     <div class="flex">
         <h1>薬剤投与指示</h1>
-        <form method="post">
+
+        <!-- エラーメッセージの表示 -->
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        <form method="post" action="{% url 'medication_instruction' patient.patid %}">
             {% csrf_token %}
             <div>
                 <label for="medication">薬剤名:</label>
@@ -55,7 +65,7 @@
                 <tbody>
                     {% for item in medication_details %}
                         <tr>
-                            <td>{{ item.medication_name }}</td> <!-- ここを修正 -->
+                            <td>{{ item.medication_name }}</td>
                             <td>{{ item.quantity }}</td>
                             <td>
                                 <form method="post" action="{% url 'medication_instruction' patient.patid %}">

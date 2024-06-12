@@ -23,30 +23,47 @@
 <body>
     <div class="container">
         <h1>薬剤投与確認</h1>
+
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
         <form method="post" action="{% url 'medication_confirmation' %}">
             {% csrf_token %}
-            <table>
-                <thead>
-                    <tr>
-                        <th>薬剤名</th>
-                        <th>数量</th>
-                        <th>操作</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for item in medication_details %}
+            {% if medication_details %}
+                <table>
+                    <thead>
                         <tr>
-                            <td>{{ item.medication_name }}</td>
-                            <td>{{ item.quantity }}</td>
-                            <td>
-                                <button type="submit" name="delete" value="{{ item.unique_id }}">削除</button>
-                            </td>
+                            <th>薬剤名</th>
+                            <th>数量</th>
+                            <th>操作</th>
                         </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {% for item in medication_details %}
+                            <tr>
+                                <td>{{ item.medication_name }}</td>
+                                <td>{{ item.quantity }}</td>
+                                <td>
+                                    <button type="submit" name="delete" value="{{ item.unique_id }}">削除</button>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>表示する薬剤がありません。薬剤を追加してください。</p>
+            {% endif %}
             <div>
-                <button type="submit" name="confirm_final">処置確定</button>
+                {% if medication_details %}
+                    <button type="submit" name="confirm_final">処置確定</button>
+                {% else %}
+                    <button type="button" disabled title="薬剤がありません">処置確定</button>
+                {% endif %}
                 <button type="submit" name="back">薬剤選択画面へ戻る</button>
             </div>
         </form>

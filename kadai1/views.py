@@ -8,6 +8,7 @@ import logging
 from django.http import HttpResponse
 from django.contrib.auth.hashers import make_password,check_password
 from django.db import IntegrityError
+from uuid import uuid4
 
 logger = logging.getLogger(__name__)
 
@@ -419,83 +420,99 @@ def search_patient_by_id(request):
 
     return render(request, 'kadai1/doctor/PatientIDSearch.html')
 
-# 薬剤投与指示ビューの修正
 def medication_instruction(request, patient_id):
     patient = get_object_or_404(Patient, patid=patient_id)
     medicines = Medicine.objects.all()
 
     if request.method == 'POST':
-        medication_id = request.POST.get('medication')
-        quantity = request.POST.get('quantity')
+        if 'confirm' in request.POST:  # 確認ボタンが押された場合
+            return redirect('medication_confirmation')
 
-        if not medication_id:
-            messages.error(request, '薬剤を選択してください。')
-            return render(request, 'kadai1/doctor/MedicationInstruction.html', {
-                'patient': patient,
-                'medicines': medicines,
-                'medication_details': [],
-                'session_data': request.session.items(),
-            })
-
-        if not quantity or int(quantity) <= 0:
-            messages.error(request, '数量は1以上の数値を入力してください。')
-            return render(request, 'kadai1/doctor/MedicationInstruction.html', {
-                'patient': patient,
-                'medicines': medicines,
-                'medication_details': [],
-                'session_data': request.session.items(),
-            })
-
-        try:
-            Medicine.objects.get(medicineid=medication_id)
+        if 'delete_medication_id' in request.POST:
+            delete_medication_id = request.POST.get('delete_medication_id')
             medication_list = request.session.get('medication_list', [])
-            medication_list.append({
-                'patient_id': patient_id,
-                'medication_id': medication_id,
-                'quantity': quantity,
-            })
+            medication_list = [item for item in medication_list if item['unique_id'] != delete_medication_id]
             request.session['medication_list'] = medication_list
-        except Medicine.DoesNotExist:
-            messages.error(request, '指定された薬剤が見つかりません。')
+        else:
+            medication_id = request.POST.get('medication')
+            quantity = request.POST.get('quantity')
+
+            if not medication_id:
+                messages.error(request, '薬剤を選択してください。')
+                return render(request, 'kadai1/doctor/MedicationInstruction.html', {
+                    'patient': patient,
+                    'medicines': medicines,
+                    'medication_details': [],
+                    'session_data': request.session.items(),
+                })
+
+            if not quantity or int(quantity) <= 0:
+                messages.error(request, '数量は1以上の数値を入力してください。')
+                return render(request, 'kadai1/doctor/MedicationInstruction.html', {
+                    'patient': patient,
+                    'medicines': medicines,
+                    'medication_details': [],
+                    'session_data': request.session.items(),
+                })
+
+            try:
+                medicine = Medicine.objects.get(medicineid=medication_id)
+                medication_list = request.session.get('medication_list', [])
+                medication_list.append({
+                    'unique_id': str(uuid4()),
+                    'patient_id': patient_id,
+                    'medication_id': medication_id,
+                    'medication_name': medicine.medicinename,  # 薬剤名をセッションに追加
+                    'quantity': quantity,
+                })
+                request.session['medication_list'] = medication_list
+            except Medicine.DoesNotExist:
+                messages.error(request, '指定された薬剤が見つかりません。')
 
     medication_list = request.session.get('medication_list', [])
-    medication_list = [item for item in medication_list if 'patient_id' in item]
-    request.session['medication_list'] = medication_list
+    medication_details = [item for item in medication_list if item['patient_id'] == patient_id]
 
-    medication_details = []
-    for item in medication_list:
-        if item['patient_id'] == patient_id:
-            try:
-                medicine = Medicine.objects.get(medicineid=item['medication_id'])
-                medication_details.append({'medicine': medicine, 'quantity': item['quantity']})
-            except Medicine.DoesNotExist:
-                continue
+    # デバッグ用の出力
+    print("Current medication list:")
+    for item in medication_details:
+        print(f"Unique ID: {item['unique_id']}, Medication Name: {item.get('medication_name', 'N/A')}, Quantity: {item['quantity']}")
 
     return render(request, 'kadai1/doctor/MedicationInstruction.html', {
         'patient': patient,
         'medicines': medicines,
         'medication_details': medication_details,
-        'session_data': request.session.items(),
     })
 
 
-# 薬剤投与確認ビューの修正
 def medication_confirmation(request):
     medication_list = request.session.get('medication_list', [])
     if not medication_list:
         messages.error(request, '薬剤指示がありません。')
         return redirect('doctor_home')
 
-    medication_list = [item for item in medication_list if 'patient_id' in item]
     patient_id = medication_list[0]['patient_id']
     patient = get_object_or_404(Patient, patid=patient_id)
 
     if request.method == 'POST':
-        if 'confirm' in request.POST:
+        if 'delete' in request.POST:
+            delete_unique_id = request.POST.get('delete')
+            medication_list = [item for item in medication_list if item['unique_id'] != delete_unique_id]
+            request.session['medication_list'] = medication_list
+            # 表示するためのデータを更新
+            medication_details = [
+                {'medication_name': item['medication_name'], 'quantity': item['quantity'], 'unique_id': item['unique_id']}
+                for item in medication_list
+            ]
+            return render(request, 'kadai1/doctor/MedicationConfirmation.html', {
+                'patient': patient,
+                'medication_details': medication_details,
+            })
+
+        if 'confirm_final' in request.POST:
             try:
                 for item in medication_list:
                     Treatment.objects.create(
-                        treatmentid=str(uuid.uuid4())[:8],
+                        treatmentid=str(uuid4())[:8],
                         patid=patient,
                         medicineid=Medicine.objects.get(medicineid=item['medication_id']),
                         quantity=item['quantity'],
@@ -506,21 +523,14 @@ def medication_confirmation(request):
                 return redirect('doctor_home')
             except Medicine.DoesNotExist:
                 messages.error(request, '指定された薬剤が見つかりません。')
-        elif 'delete' in request.POST:
-            medication_id = request.POST.get('medication_id')
-            unique_id = request.POST.get('unique_id')
-            medication_list = [item for item in medication_list if not (item['medication_id'] == medication_id and item['unique_id'] == unique_id)]
-            request.session['medication_list'] = medication_list
-        elif 'back' in request.POST:
+
+        if 'back' in request.POST:
             return redirect('medication_instruction', patient_id=patient.patid)
 
-    medication_details = []
-    for item in medication_list:
-        try:
-            medicine = Medicine.objects.get(medicineid=item['medication_id'])
-            medication_details.append({'medicine': medicine, 'quantity': item['quantity'], 'unique_id': item['unique_id']})
-        except Medicine.DoesNotExist:
-            continue
+    medication_details = [
+        {'medication_name': item['medication_name'], 'quantity': item['quantity'], 'unique_id': item['unique_id']}
+        for item in medication_list
+    ]
 
     return render(request, 'kadai1/doctor/MedicationConfirmation.html', {
         'patient': patient,

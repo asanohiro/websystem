@@ -49,20 +49,28 @@
                     <tr>
                         <th>薬剤名</th>
                         <th>数量</th>
+                        <th>操作</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for item in medication_details %}
                         <tr>
-                            <td>{{ item.medicine.medicinename }}</td>
+                            <td>{{ item.medication_name }}</td> <!-- ここを修正 -->
                             <td>{{ item.quantity }}</td>
+                            <td>
+                                <form method="post" action="{% url 'medication_instruction' patient.patid %}">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="delete_medication_id" value="{{ item.unique_id }}">
+                                    <button type="submit">削除</button>
+                                </form>
+                            </td>
                         </tr>
                     {% endfor %}
                 </tbody>
             </table>
             <form method="post" action="{% url 'medication_confirmation' %}">
                 {% csrf_token %}
-                <button type="submit">確認画面へ</button>
+                <button type="submit" name="confirm">確認画面へ</button>
             </form>
         {% endif %}
     </div>

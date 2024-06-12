@@ -36,17 +36,17 @@
                 <tbody>
                     {% for item in medication_details %}
                         <tr>
-                            <td>{{ item.medicine.medicinename }}</td>
+                            <td>{{ item.medication_name }}</td>
                             <td>{{ item.quantity }}</td>
                             <td>
-                                <button type="submit" name="delete" value="{{ item.medicine.medicineid }}">削除</button>
+                                <button type="submit" name="delete" value="{{ item.unique_id }}">削除</button>
                             </td>
                         </tr>
                     {% endfor %}
                 </tbody>
             </table>
             <div>
-                <button type="submit" name="confirm">処置確定</button>
+                <button type="submit" name="confirm_final">処置確定</button>
                 <button type="submit" name="back">薬剤選択画面へ戻る</button>
             </div>
         </form>

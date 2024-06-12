@@ -549,10 +549,17 @@ def treatment_history(request):
     if request.method == 'POST':
         patient_id = request.POST.get('patient_id')
         if patient_id:
-            patient = get_object_or_404(Patient, patid=patient_id)
-            treatments = Treatment.objects.filter(patid=patient).order_by('-treatmentdate')
+            try:
+                patient = Patient.objects.get(patid=patient_id)
+                treatments = Treatment.objects.filter(patid=patient).order_by('-treatmentdate')
+
+                if not treatments.exists():
+                    messages.error(request, 'この患者に処置を行ったことはありません。')
+                    treatments = None
+            except Patient.DoesNotExist:
+                messages.error(request, '未登録の患者IDです。')
 
     return render(request, 'kadai1/doctor/TreatmentHistory.html', {
-        'patient': patient,
         'treatments': treatments
     })
+

@@ -7,10 +7,12 @@
         table {
             width: 100%;
             border-collapse: collapse;
+            margin-bottom: 20px;
         }
         th, td {
             border: 1px solid #ddd;
             padding: 8px;
+            text-align: left;
         }
         th {
             background-color: #f2f2f2;
@@ -18,46 +20,79 @@
         tr:hover {
             background-color: #f5f5f5;
         }
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .button-container button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .button-container button:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
 <body>
-    <h1>処置履歴確認</h1>
-    <form method="post">
-        {% csrf_token %}
-        <div>
-            <label for="patient_id">患者ID:</label>
-            <input type="text" id="patient_id" name="patient_id" required>
-            <button type="submit">検索</button>
-        </div>
-    </form>
-    {% if treatments is not None %}
+    <div class="container">
+        <h1>処置履歴確認</h1>
+
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        <form method="post" action="{% url 'treatment_history' %}">
+            {% csrf_token %}
+            <div>
+                <label for="patient_id">患者ID:</label>
+                <input type="text" id="patient_id" name="patient_id" required>
+            </div>
+            <div>
+                <button type="submit">検索</button>
+            </div>
+        </form>
+
         {% if treatments %}
-            <h2>処置履歴:</h2>
+            <h2>処置履歴</h2>
             <table>
                 <thead>
                     <tr>
-                        <th>処置日</th>
+                        <th>処置ID</th>
                         <th>薬剤名</th>
                         <th>数量</th>
+                        <th>処置日</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for treatment in treatments %}
                         <tr>
-                            <td>{{ treatment.treatmentdate }}</td>
+                            <td>{{ treatment.treatmentid }}</td>
                             <td>{{ treatment.medicineid.medicinename }}</td>
                             <td>{{ treatment.quantity }}</td>
+                            <td>{{ treatment.treatmentdate }}</td>
                         </tr>
                     {% endfor %}
                 </tbody>
             </table>
         {% else %}
-            <p>該当患者の処置履歴がありません。</p>
+            <p>この患者に処置を行ったことはありません。</p>
         {% endif %}
-        <div>
-            <button onclick="window.location.href='{% url 'doctor_home' %}'">メニューに戻る</button>
-            <button onclick="window.location.href='{% url 'treatment_history' %}'">患者IDを指定する</button>
+
+        <div class="button-container">
+            <form method="get" action="{% url 'doctor_home' %}">
+                <button type="submit">メニューに戻る</button>
+            </form>
         </div>
-    {% endif %}
+    </div>
 </body>
 </html>

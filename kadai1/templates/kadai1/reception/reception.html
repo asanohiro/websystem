@@ -41,13 +41,6 @@
     </style>
 </head>
 <body>
-{% if messages %}
-        <ul>
-            {% for message in messages %}
-                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}
     <h1>機能選択</h1>
     <div class="buttons">
         <a href="{% url 'passchange' %}">従業員パスワード変更機能</a>

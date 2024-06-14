@@ -254,30 +254,58 @@ def search_hospital_by_address(request):
         hospitals = Tabyouin.objects.filter(tabyouinaddress__icontains=address)
     return render(request, 'kadai1/administrator/OtherHospitalAddressSearch.html', {'hospitals': hospitals})
 
+
 def change_password_view(request):
+    user_role = request.session.get('employee_role')
+    employee_id = request.session.get('employee_id')
+
+    # セッションが無効な場合
+    if not employee_id:
+        messages.error(request, 'セッションが期限切れです。再度ログインしてください。')
+        return redirect('login')
+
+    # ロールに応じてテンプレートを設定
+    if user_role == 2:
+        template_name = 'kadai1/doctor/PassChangeDoctor.html'
+    elif user_role == 3:
+        template_name = 'kadai1/reception/PassChange.html'
+    else:
+        messages.error(request, '無効なユーザーです。')
+        return redirect('login')
+
     if request.method == 'POST':
-        current_password = request.POST.get('current_password')
-        new_password = request.POST.get('new_password')
-        confirm_password = request.POST.get('confirm_password')
+        new_password = request.POST.get('new_password', '').strip()
+        confirm_password = request.POST.get('confirm_password', '').strip()
+
+        # 入力チェック
+        if not new_password:
+            messages.error(request, '新しいパスワードを入力してください。')
+            return render(request, template_name)
+
+        if not confirm_password:
+            messages.error(request, '確認用のパスワードを入力してください。')
+            return render(request, template_name)
 
         if new_password != confirm_password:
             messages.error(request, '新しいパスワードが一致しません。')
-            return render(request, 'kadai1/reception/PassChange.html')
+            return render(request, template_name)
 
-        employee_id = request.session.get('employee_id')
-        if not employee_id:
-            messages.error(request, 'セッションが期限切れです。再度ログインしてください。')
-            return redirect('login')
-
+        # 従業員を取得して新しいパスワードを設定
         employee = get_object_or_404(Employee, empid=employee_id)
-
-        # 新しいパスワードをハッシュ化して保存
         employee.emppasswd = make_password(new_password)
         employee.save()
-        messages.success(request, 'パスワードが正常に変更されました。')
-        return redirect('reception_home')  # ホーム画面にリダイレクト（URLは適宜調整してください）
 
-    return render(request, 'kadai1/reception/PassChange.html')
+        messages.success(request, 'パスワードが正常に変更されました。')
+
+        # パスワード変更画面にリダイレクト
+        if user_role == 2:
+            return render(request, template_name)
+        elif user_role == 3:
+            return render(request, template_name)
+        else:
+            return redirect('login')
+
+    return render(request, template_name)
 
 
 def patient_register_view(request):
@@ -420,12 +448,6 @@ def search_patient_by_id(request):
 
     return render(request, 'kadai1/doctor/PatientIDSearch.html')
 
-from django.shortcuts import redirect, render, get_object_or_404
-from django.contrib import messages
-from .models import Patient, Medicine, Treatment
-from uuid import uuid4
-from datetime import date
-
 def medication_instruction(request, patient_id):
     patient = get_object_or_404(Patient, patid=patient_id)
     medicines = Medicine.objects.all()
@@ -537,7 +559,6 @@ def medication_confirmation(request):
         'patient': patient,
         'medication_details': medication_details,
     })
-
 
 def treatment_history(request):
     if request.session.get('employee_role') != 2:

@@ -4,12 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8abb9f8d-94d8-470b-b382-742116187535" name="変更" comment="6/12&#10;エラーメッセージ追加完了。今から処置履歴確認画面の調整。これが終われば医師の画面終了。">
+    <list default="true" id="8abb9f8d-94d8-470b-b382-742116187535" name="変更" comment="6/12&#10;医師画面終了かな？">
+      <change afterPath="$PROJECT_DIR$/kadai1/templates/kadai1/doctor/PassChangeDoctor.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/debug.log" beforeDir="false" afterPath="$PROJECT_DIR$/debug.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kadai1/templates/kadai1/doctor/PatientIDSearch.html" beforeDir="false" afterPath="$PROJECT_DIR$/kadai1/templates/kadai1/doctor/PatientIDSearch.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kadai1/templates/kadai1/doctor/PatientNameSearchDoctor.html" beforeDir="false" afterPath="$PROJECT_DIR$/kadai1/templates/kadai1/doctor/PatientNameSearchDoctor.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kadai1/templates/kadai1/doctor/TreatmentHistory.html" beforeDir="false" afterPath="$PROJECT_DIR$/kadai1/templates/kadai1/doctor/TreatmentHistory.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kadai1/templates/kadai1/doctor/doctor.html" beforeDir="false" afterPath="$PROJECT_DIR$/kadai1/templates/kadai1/doctor/doctor.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kadai1/templates/kadai1/reception/reception.html" beforeDir="false" afterPath="$PROJECT_DIR$/kadai1/templates/kadai1/reception/reception.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/kadai1/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/kadai1/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -160,7 +160,8 @@
       <workItem from="1718031049586" duration="408000" />
       <workItem from="1718066246010" duration="8270000" />
       <workItem from="1718168475391" duration="7634000" />
-      <workItem from="1718202832403" duration="1357000" />
+      <workItem from="1718202832403" duration="1736000" />
+      <workItem from="1718244445489" duration="4882000" />
     </task>
     <task id="LOCAL-00001" summary="ほぼ完成">
       <option name="closed" value="true" />
@@ -210,7 +211,15 @@
       <option name="project" value="LOCAL" />
       <updated>1718202928775</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="6/12&#10;医師画面終了かな？">
+      <option name="closed" value="true" />
+      <created>1718204569157</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1718204569157</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -235,6 +244,7 @@
     <MESSAGE value="6/11　medication_confimation関数を弄るので、保健のためのコミット" />
     <MESSAGE value="6/12&#10;エラーメッセージ追加のために一旦保存。医師の機能はだいたい良くなったと思う。" />
     <MESSAGE value="6/12&#10;エラーメッセージ追加完了。今から処置履歴確認画面の調整。これが終われば医師の画面終了。" />
-    <option name="LAST_COMMIT_MESSAGE" value="6/12&#10;エラーメッセージ追加完了。今から処置履歴確認画面の調整。これが終われば医師の画面終了。" />
+    <MESSAGE value="6/12&#10;医師画面終了かな？" />
+    <option name="LAST_COMMIT_MESSAGE" value="6/12&#10;医師画面終了かな？" />
   </component>
 </project>

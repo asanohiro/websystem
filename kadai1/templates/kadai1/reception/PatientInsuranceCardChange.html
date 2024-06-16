@@ -11,19 +11,24 @@
             {% csrf_token %}
             <div>
                 <label for="patient_id">患者ID:</label>
-                <input type="text" id="patient_id" name="patient_id" required>
+                <input type="text" id="patient_id" name="patient_id" value="">
+                <button type="submit" name="search">患者検索</button>
             </div>
-            <div>
-                <label for="insurance_number">新しい保険証記号番号:</label>
-                <input type="text" id="insurance_number" name="insurance_number">
-            </div>
-            <div>
-                <label for="expiration_date">新しい有効期限:</label>
-                <input type="date" id="expiration_date" name="expiration_date">
-            </div>
-            <div>
-                <button type="submit">変更確認</button>
-            </div>
+            {% if patient %}
+                <div>
+                    <label for="insurance_number">新しい保険証記号番号:</label>
+                    <input type="text" id="insurance_number" name="insurance_number" value="{{ patient.hokenmei }}" required>
+                </div>
+                <div>
+                    <label for="expiration_date">新しい有効期限:</label>
+                    <input type="date" id="expiration_date" name="expiration_date" value="{{ patient.hokenexp|date:'Y-m-d' }}" required>
+                </div>
+                <div>
+                    <button type="submit" name="confirm">変更確認</button>
+                </div>
+            {% else %}
+                <p>患者IDを入力して「患者検索」を押してください。</p>
+            {% endif %}
         </form>
     </div>
 </body>

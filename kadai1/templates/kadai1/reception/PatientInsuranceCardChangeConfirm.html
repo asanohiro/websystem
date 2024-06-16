@@ -14,10 +14,6 @@
                 <input type="hidden" name="patient_id" value="{{ patient_id }}">
             </div>
             <div>
-                <p>患者姓: {{ patient_lname }}</p>
-                <p>患者名: {{ patient_fname }}</p>
-            </div>
-            <div>
                 <p>新しい保険証記号番号: {{ insurance_number }}</p>
                 <input type="hidden" name="insurance_number" value="{{ insurance_number }}">
             </div>
@@ -26,7 +22,8 @@
                 <input type="hidden" name="expiration_date" value="{{ expiration_date }}">
             </div>
             <div>
-                <button type="submit">変更</button>
+                <button type="submit">変更を確定</button>
+                <a href="{% url 'insurance_card_change' %}">戻る</a>
             </div>
         </form>
     </div>

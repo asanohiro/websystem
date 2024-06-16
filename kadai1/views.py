@@ -355,26 +355,47 @@ def patient_register_confirm_view(request):
 
 
 def insurance_card_change_view(request):
+    patient = None
+    patient_id = None
+
     if request.method == 'POST':
-        patient_id = request.POST.get('patient_id')
-        patient = get_object_or_404(Patient, patid=patient_id)
-        insurance_number = request.POST.get('insurance_number')
-        expiration_date = request.POST.get('expiration_date')
+        if 'search' in request.POST:
+            patient_id = request.POST.get('patient_id')
+            if not patient_id:
+                messages.error(request, '患者IDを入力してください。')
+            else:
+                try:
+                    patient = Patient.objects.get(patid=patient_id)
+                except Patient.DoesNotExist:
+                    messages.error(request, '該当する患者が存在しません。')
+                    patient = None
 
-        if not insurance_number and not expiration_date:
-            messages.error(request, '保険証記号番号か有効期限のいずれかを入力してください。')
-            return render(request, 'kadai1/reception/PatientInsuranceCardChange.html', {'patient': patient})
+        if 'confirm' in request.POST:
+            patient_id = request.POST.get('patient_id')
+            insurance_number = request.POST.get('insurance_number')
+            expiration_date = request.POST.get('expiration_date')
 
-        context = {
-            'patient_id': patient.patid,
-            'patient_lname': patient.patlname,
-            'patient_fname': patient.patfname,
-            'insurance_number': insurance_number,
-            'expiration_date': expiration_date,
-        }
-        return render(request, 'kadai1/reception/PatientInsuranceCardChangeConfirm.html', context)
+            if not insurance_number or not expiration_date:
+                messages.error(request, '保険証記号番号と有効期限の両方を入力してください。')
+                patient = Patient.objects.get(patid=patient_id) if patient_id else None
+                return render(request, 'kadai1/reception/PatientInsuranceCardChange.html', {'patient': patient, 'patient_id': patient_id})
 
-    return render(request, 'kadai1/reception/PatientInsuranceCardChange.html')
+            try:
+                patient = Patient.objects.get(patid=patient_id)
+            except Patient.DoesNotExist:
+                messages.error(request, '該当する患者が存在しません。')
+                return redirect('insurance_card_change')
+
+            context = {
+                'patient_id': patient.patid,
+                'patient_lname': patient.patlname,
+                'patient_fname': patient.patfname,
+                'insurance_number': insurance_number,
+                'expiration_date': expiration_date,
+            }
+            return render(request, 'kadai1/reception/PatientInsuranceCardChangeConfirm.html', context)
+
+    return render(request, 'kadai1/reception/PatientInsuranceCardChange.html', {'patient': patient, 'patient_id': patient_id})
 
 
 def insurance_card_change_confirm_view(request):
@@ -383,7 +404,11 @@ def insurance_card_change_confirm_view(request):
         insurance_number = request.POST.get('insurance_number')
         expiration_date = request.POST.get('expiration_date')
 
-        patient = get_object_or_404(Patient, patid=patient_id)
+        try:
+            patient = Patient.objects.get(patid=patient_id)
+        except Patient.DoesNotExist:
+            messages.error(request, '該当する患者が存在しません。')
+            return redirect('insurance_card_change')
 
         if insurance_number:
             patient.hokenmei = insurance_number
@@ -393,7 +418,7 @@ def insurance_card_change_confirm_view(request):
         try:
             patient.save()
             messages.success(request, '保険証情報が正常に変更されました。')
-            return redirect('reception_home')
+            return redirect('insurance_card_change')
         except IntegrityError:
             messages.error(request, '更新中にエラーが発生しました。')
             return redirect('insurance_card_change')

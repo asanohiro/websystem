@@ -17,6 +17,13 @@
                 <button type="submit">検索</button>
             </div>
         </form>
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
         {% if hospitals %}
         <table>
             <thead>
@@ -42,8 +49,6 @@
                 {% endfor %}
             </tbody>
         </table>
-        {% else %}
-        <p>検索結果がありません。</p>
         {% endif %}
     </div>
 </body>

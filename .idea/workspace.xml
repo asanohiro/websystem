@@ -4,11 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8abb9f8d-94d8-470b-b382-742116187535" name="変更" comment="6/14&#10;受付やったら終わり？">
+    <list default="true" id="8abb9f8d-94d8-470b-b382-742116187535" name="変更" comment="6/16&#10;コミット">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/debug.log" beforeDir="false" afterPath="$PROJECT_DIR$/debug.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kadai1/templates/kadai1/reception/PatientInsuranceCardChange.html" beforeDir="false" afterPath="$PROJECT_DIR$/kadai1/templates/kadai1/reception/PatientInsuranceCardChange.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kadai1/templates/kadai1/reception/PatientInsuranceCardChangeConfirm.html" beforeDir="false" afterPath="$PROJECT_DIR$/kadai1/templates/kadai1/reception/PatientInsuranceCardChangeConfirm.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kadai1/templates/kadai1/administrator/OtherHospitalAddressSearch.html" beforeDir="false" afterPath="$PROJECT_DIR$/kadai1/templates/kadai1/administrator/OtherHospitalAddressSearch.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kadai1/templates/kadai1/administrator/PassChangeAdmin.html" beforeDir="false" afterPath="$PROJECT_DIR$/kadai1/templates/kadai1/administrator/PassChangeAdmin.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kadai1/templates/kadai1/administrator/administrator.html" beforeDir="false" afterPath="$PROJECT_DIR$/kadai1/templates/kadai1/administrator/administrator.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kadai1/templates/kadai1/doctor/MedicationInstruction.html" beforeDir="false" afterPath="$PROJECT_DIR$/kadai1/templates/kadai1/doctor/MedicationInstruction.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kadai1/templates/kadai1/doctor/TreatmentHistory.html" beforeDir="false" afterPath="$PROJECT_DIR$/kadai1/templates/kadai1/doctor/TreatmentHistory.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kadai1/templates/kadai1/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/kadai1/templates/kadai1/login.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/kadai1/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/kadai1/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -163,6 +167,7 @@
       <workItem from="1718244445489" duration="4882000" />
       <workItem from="1718324567459" duration="6444000" />
       <workItem from="1718340472771" duration="617000" />
+      <workItem from="1718513811298" duration="1989000" />
     </task>
     <task id="LOCAL-00001" summary="ほぼ完成">
       <option name="closed" value="true" />
@@ -228,7 +233,15 @@
       <option name="project" value="LOCAL" />
       <updated>1718325951099</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="6/16&#10;コミット">
+      <option name="closed" value="true" />
+      <created>1718513893801</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1718513893801</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -255,6 +268,7 @@
     <MESSAGE value="6/12&#10;エラーメッセージ追加完了。今から処置履歴確認画面の調整。これが終われば医師の画面終了。" />
     <MESSAGE value="6/12&#10;医師画面終了かな？" />
     <MESSAGE value="6/14&#10;受付やったら終わり？" />
-    <option name="LAST_COMMIT_MESSAGE" value="6/14&#10;受付やったら終わり？" />
+    <MESSAGE value="6/16&#10;コミット" />
+    <option name="LAST_COMMIT_MESSAGE" value="6/16&#10;コミット" />
   </component>
 </project>

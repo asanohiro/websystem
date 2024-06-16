@@ -46,7 +46,9 @@
         {% if messages %}
             <ul>
                 {% for message in messages %}
-                    <li>{{ message }}</li>
+                    {% if 'treatment_history' in message.tags %}
+                        <li>{{ message }}</li>
+                    {% endif %}
                 {% endfor %}
             </ul>
         {% endif %}
@@ -55,10 +57,8 @@
             {% csrf_token %}
             <div>
                 <label for="patient_id">患者ID:</label>
-                <input type="text" id="patient_id" name="patient_id" required>
-            </div>
-            <div>
-                <button type="submit">検索</button>
+                <input type="text" id="patient_id" name="patient_id" value="{{ patient_id|default:'' }}">
+                <button type="submit" name="search">検索</button>
             </div>
         </form>
 
@@ -84,8 +84,6 @@
                     {% endfor %}
                 </tbody>
             </table>
-        {% else %}
-            <p>この患者に処置を行ったことはありません。</p>
         {% endif %}
 
         <div class="button-container">

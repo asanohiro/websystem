@@ -59,7 +59,6 @@
                     <tr>
                         <th>薬剤名</th>
                         <th>数量</th>
-                        <th>操作</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -67,13 +66,6 @@
                         <tr>
                             <td>{{ item.medication_name }}</td>
                             <td>{{ item.quantity }}</td>
-                            <td>
-                                <form method="post" action="{% url 'medication_instruction' patient.patid %}">
-                                    {% csrf_token %}
-                                    <input type="hidden" name="delete_medication_id" value="{{ item.unique_id }}">
-                                    <button type="submit">削除</button>
-                                </form>
-                            </td>
                         </tr>
                     {% endfor %}
                 </tbody>

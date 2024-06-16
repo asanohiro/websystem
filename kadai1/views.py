@@ -22,12 +22,12 @@ def login_view(request):
 
         if not userid or not password:
             logger.debug('ユーザーIDまたはパスワードが入力されていません。')
-            messages.error(request, 'ユーザーIDとパスワードは必須です。')
+            messages.error(request, 'ユーザーIDとパスワードは必須です。', extra_tags='login')
             return render(request, 'kadai1/login.html')
 
         if len(userid) > 20 or len(password) > 128:
             logger.debug('ユーザーIDまたはパスワードの長さが不正です。')
-            messages.error(request, 'ユーザーIDまたはパスワードの長さが不正です。')
+            messages.error(request, 'ユーザーIDまたはパスワードの長さが不正です。', extra_tags='login')
             return render(request, 'kadai1/login.html')
 
         try:
@@ -42,7 +42,7 @@ def login_view(request):
                     return redirect('admin_home')
                 else:
                     logger.debug('管理者のパスワードチェックに失敗しました。')
-                    messages.error(request, 'ユーザーIDまたはパスワードが無効です。')
+                    messages.error(request, 'ユーザーIDまたはパスワードが無効です。', extra_tags='login')
             else:
                 if check_password(password, employee.emppasswd):
                     logger.debug('パスワードチェックに成功しました。')
@@ -55,18 +55,18 @@ def login_view(request):
                         return redirect('reception_home')
                     else:
                         logger.debug('無効な役割です。')
-                        messages.error(request, '無効な役割です。')
+                        messages.error(request, '無効な役割です。', extra_tags='login')
                 else:
                     logger.debug('パスワードチェックに失敗しました。')
-                    messages.error(request, 'ユーザーIDまたはパスワードが無効です。')
+                    messages.error(request, 'ユーザーIDまたはパスワードが無効です。', extra_tags='login')
 
         except Employee.DoesNotExist:
             logger.debug('従業員が存在しません。')
-            messages.error(request, 'ユーザーIDまたはパスワードが無効です。')
+            messages.error(request, 'ユーザーIDまたはパスワードが無効です。', extra_tags='login')
 
         except Exception as e:
             logger.error(f'ログイン中に予期しないエラーが発生しました: {e}')
-            messages.error(request, '予期しないエラーが発生しました。もう一度お試しください。')
+            messages.error(request, '予期しないエラーが発生しました。もう一度お試しください。', extra_tags='login')
 
     return render(request, 'kadai1/login.html')
 
@@ -248,10 +248,16 @@ def other_hospital_list(request):
     return render(request, 'kadai1/administrator/ListofOtherHospitals.html', {'hospitals': hospitals})
 
 def search_hospital_by_address(request):
-    hospitals = None
+    hospitals = []
     if request.method == 'POST':
-        address = request.POST.get('address')
-        hospitals = Tabyouin.objects.filter(tabyouinaddress__icontains=address)
+        address = request.POST.get('address', '').strip()
+        if not address:
+            messages.error(request, '住所を入力してください。')
+        else:
+            hospitals = Tabyouin.objects.filter(tabyouinaddress__icontains=address)
+            if not hospitals:
+                messages.warning(request, '該当する病院が見つかりませんでした。')
+
     return render(request, 'kadai1/administrator/OtherHospitalAddressSearch.html', {'hospitals': hospitals})
 
 
@@ -265,7 +271,9 @@ def change_password_view(request):
         return redirect('login')
 
     # ロールに応じてテンプレートを設定
-    if user_role == 2:
+    if user_role == 1:
+        template_name = 'kadai1/administrator/PassChangeAdmin.html'
+    elif user_role == 2:
         template_name = 'kadai1/doctor/PassChangeDoctor.html'
     elif user_role == 3:
         template_name = 'kadai1/reception/PassChange.html'
@@ -292,18 +300,18 @@ def change_password_view(request):
 
         # 従業員を取得して新しいパスワードを設定
         employee = get_object_or_404(Employee, empid=employee_id)
-        employee.emppasswd = make_password(new_password)
+        if user_role == 1:
+            # 管理者の場合はハッシュ化せずにそのまま保存
+            employee.emppasswd = new_password
+        else:
+            # 医師や受付の場合はハッシュ化して保存
+            employee.emppasswd = make_password(new_password)
         employee.save()
 
-        messages.success(request, 'パスワードが正常に変更されました。')
+        messages.success(request, '変更しました。')
 
         # パスワード変更画面にリダイレクト
-        if user_role == 2:
-            return render(request, template_name)
-        elif user_role == 3:
-            return render(request, template_name)
-        else:
-            return redirect('login')
+        return render(request, template_name)
 
     return render(request, template_name)
 
@@ -591,21 +599,28 @@ def treatment_history(request):
 
     treatments = None
     patient = None
+    patient_id = ''
 
     if request.method == 'POST':
-        patient_id = request.POST.get('patient_id')
-        if patient_id:
+        patient_id = request.POST.get('patient_id').strip()
+
+        # 患者IDが空の場合のエラーメッセージ
+        if not patient_id:
+            messages.error(request, '患者IDを入力してください。', extra_tags='treatment_history')
+        else:
             try:
                 patient = Patient.objects.get(patid=patient_id)
                 treatments = Treatment.objects.filter(patid=patient).order_by('-treatmentdate')
 
                 if not treatments.exists():
-                    messages.error(request, 'この患者に処置を行ったことはありません。')
+                    messages.error(request, 'この患者に処置を行ったことはありません。', extra_tags='treatment_history')
                     treatments = None
             except Patient.DoesNotExist:
-                messages.error(request, '未登録の患者IDです。')
+                messages.error(request, '未登録の患者IDです。', extra_tags='treatment_history')
 
     return render(request, 'kadai1/doctor/TreatmentHistory.html', {
-        'treatments': treatments
+        'treatments': treatments,
+        'patient_id': patient_id
     })
+
 

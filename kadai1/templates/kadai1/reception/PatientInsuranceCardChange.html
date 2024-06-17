@@ -7,17 +7,26 @@
 <body>
     <div class="container">
         <h1>保険証情報変更</h1>
+        <!-- メッセージ表示エリア -->
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
         <form action="{% url 'insurance_card_change' %}" method="post">
             {% csrf_token %}
             <div>
                 <label for="patient_id">患者ID:</label>
-                <input type="text" id="patient_id" name="patient_id" value="">
+                <input type="text" id="patient_id" name="patient_id" value="{{ patient_id|default_if_none:'' }}">
                 <button type="submit" name="search">患者検索</button>
             </div>
             {% if patient %}
                 <div>
                     <label for="insurance_number">新しい保険証記号番号:</label>
-                    <input type="text" id="insurance_number" name="insurance_number" value="{{ patient.hokenmei }}" required>
+                    <input type="text" id="insurance_number" name="insurance_number" value="{{ patient.hokenmei }}" required pattern="\d{10}" title="保険証記号番号は10桁の数字である必要があります。">
                 </div>
                 <div>
                     <label for="expiration_date">新しい有効期限:</label>

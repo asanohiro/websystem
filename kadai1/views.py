@@ -9,6 +9,8 @@ from django.http import HttpResponse
 from django.contrib.auth.hashers import make_password,check_password
 from django.db import IntegrityError
 from uuid import uuid4
+import re
+from datetime import datetime
 
 logger = logging.getLogger(__name__)
 
@@ -203,8 +205,15 @@ def other_hospital_register_view(request):
             messages.error(request, '他病院IDは数値を入力してください。')
             return render(request, 'kadai1/administrator/OtherHospitalRegistration.html')
 
-        if not tabyouintel.isdigit():
+        # 電話番号の検証
+        if not re.match(r'^[0-9（）()-]+$', tabyouintel):
             messages.error(request, '他病院電話番号は数字、（）、-を入力してください。')
+            return render(request, 'kadai1/administrator/OtherHospitalRegistration.html')
+
+        # 電話番号の数値部分の桁数チェック（10桁または11桁を想定）
+        num_digits = len(re.sub(r'\D', '', tabyouintel))
+        if num_digits < 10 or num_digits > 11:
+            messages.error(request, '電話番号は10桁または11桁の数値を含む形式で入力してください。')
             return render(request, 'kadai1/administrator/OtherHospitalRegistration.html')
 
         try:
@@ -370,12 +379,12 @@ def insurance_card_change_view(request):
         if 'search' in request.POST:
             patient_id = request.POST.get('patient_id')
             if not patient_id:
-                messages.error(request, '患者IDを入力してください。')
+                messages.error(request, '患者IDを入力してください。', extra_tags='insurance_card_change')
             else:
                 try:
                     patient = Patient.objects.get(patid=patient_id)
                 except Patient.DoesNotExist:
-                    messages.error(request, '該当する患者が存在しません。')
+                    messages.error(request, '該当する患者が存在しません。', extra_tags='insurance_card_change')
                     patient = None
 
         if 'confirm' in request.POST:
@@ -384,14 +393,19 @@ def insurance_card_change_view(request):
             expiration_date = request.POST.get('expiration_date')
 
             if not insurance_number or not expiration_date:
-                messages.error(request, '保険証記号番号と有効期限の両方を入力してください。')
+                messages.error(request, '保険証記号番号と有効期限の両方を入力してください。', extra_tags='insurance_card_change')
+                patient = Patient.objects.get(patid=patient_id) if patient_id else None
+                return render(request, 'kadai1/reception/PatientInsuranceCardChange.html', {'patient': patient, 'patient_id': patient_id})
+
+            if len(insurance_number) != 10 or not insurance_number.isdigit():
+                messages.error(request, '保険証記号番号は10桁の数値で入力してください。', extra_tags='insurance_card_change')
                 patient = Patient.objects.get(patid=patient_id) if patient_id else None
                 return render(request, 'kadai1/reception/PatientInsuranceCardChange.html', {'patient': patient, 'patient_id': patient_id})
 
             try:
                 patient = Patient.objects.get(patid=patient_id)
             except Patient.DoesNotExist:
-                messages.error(request, '該当する患者が存在しません。')
+                messages.error(request, '該当する患者が存在しません。', extra_tags='insurance_card_change')
                 return redirect('insurance_card_change')
 
             context = {
@@ -415,20 +429,28 @@ def insurance_card_change_confirm_view(request):
         try:
             patient = Patient.objects.get(patid=patient_id)
         except Patient.DoesNotExist:
-            messages.error(request, '該当する患者が存在しません。')
+            messages.error(request, '該当する患者が存在しません。', extra_tags='insurance_card_change')
             return redirect('insurance_card_change')
 
         if insurance_number:
             patient.hokenmei = insurance_number
         if expiration_date:
-            patient.hokenexp = expiration_date
+            try:
+                expiration_date_obj = datetime.strptime(expiration_date, '%Y-%m-%d').date()
+                if expiration_date_obj <= patient.hokenexp:
+                    messages.error(request, '有効期限は既存の日付より新しい日付にしてください。', extra_tags='insurance_card_change')
+                    return redirect('insurance_card_change')
+                patient.hokenexp = expiration_date_obj
+            except ValueError:
+                messages.error(request, '有効期限の日付が無効です。', extra_tags='insurance_card_change')
+                return redirect('insurance_card_change')
 
         try:
             patient.save()
-            messages.success(request, '保険証情報が正常に変更されました。')
+            messages.success(request, '保険証情報が正常に変更されました。', extra_tags='insurance_card_change')
             return redirect('insurance_card_change')
-        except IntegrityError:
-            messages.error(request, '更新中にエラーが発生しました。')
+        except Exception as e:
+            messages.error(request, '更新中にエラーが発生しました。', extra_tags='insurance_card_change')
             return redirect('insurance_card_change')
 
     return redirect('insurance_card_change')
